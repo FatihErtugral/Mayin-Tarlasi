@@ -138,7 +138,7 @@ namespace MMayinTarlasi
             }
             else if (toggleZor.CheckState == CheckState.Checked)
             {
-                GAME.Start(50, 20, 140); second = 250;
+                GAME.Start(50, 20, 10); second = 250;
             }
             Refresh();
             #endregion
@@ -206,10 +206,9 @@ namespace MMayinTarlasi
                     case "help" :
                         txtBoxConsoleBody.Text += 
                                     "print array    => iki boyutlu diziyi yazdırır, 9'lar mayınları temsil eder\n"+
-                                    "bomb off       => Bütün mayınları tedbirli moda geçirir\n"+
-                                    "bomb on        => Bütün mayınları tedbirli moddan çıkartır\n"+
-                                    "clear          => Ekranı temizler\n"+
-                                    "exit           => Oyunu kapatır\n";
+                                    "bomb           => Bütün mayınları aktif-pasif yap.\n"+
+                                    "clear          => Ekranı temizle.\n"+
+                                    "exit           => Oyundan çık.\n";
                         break;
                     case "print array": txtBoxConsoleBody.Text += GAME.MapMatrixToString(); break;
                     case "bomb": GAME.MineToggleLock(); break;

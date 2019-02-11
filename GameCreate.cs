@@ -36,7 +36,7 @@ namespace MMayinTarlasi
         private readonly int btnTopBottomMargin = 1;
 
         private readonly Color btnGameStep_BackColor     = Color.FromArgb(143,188,139);
-        private readonly Color btnGameStep_BorderColor   = Color.FromArgb(0,255,127);
+        private readonly Color btnGameStep_BorderColor   = Color.FromArgb(143,188,139);
         private readonly Color btnGameMine_BackColor     = Color.FromArgb(255,255,200);
         private readonly Color btnGameMine_BorderColor   = Color.FromArgb(255,255,200);
         private readonly Color btnGameClean_BackColor    = Color.FromArgb(191, 191, 191); 
@@ -154,28 +154,28 @@ namespace MMayinTarlasi
             GameButton btn = (GameButton)_.gBtn.Clone();
              
             btn.FlatAppearance.BorderColor = _.btnGameDefault_BorderColor;
-            btn.GameValue = _.gameArrMap.map[cordX, cordY];
-            btn.CordX = cordX;
-            btn.CordY = cordY;
-            _._Point.X = (cordX * (btn.Width + _.btnLeftRightMargin));
-            _._Point.Y = (cordY * (btn.Height + _.btnTopBottomMargin));
-            btn.Location = _._Point;
-            btn.MouseDown += _.GameBtnClick;
+            btn.GameValue   = _.gameArrMap.map[cordX, cordY];
+            btn.CordX       = cordX;
+            btn.CordY       = cordY;
+            _._Point.X      = (cordX * (btn.Width + _.btnLeftRightMargin));
+            _._Point.Y      = (cordY * (btn.Height + _.btnTopBottomMargin));
+            btn.Location    = _._Point;
+            btn.MouseDown   += _.GameBtnClick;
 
             return btn;
         }
 
         #region Mayın tarlasını tarayıp otomatik açan algoritmamız.
         
-        private static readonly sbyte[] x = { 1, -1,  1, -1, 1, -1,  0, 0};
-        private static readonly sbyte[] y = { 1, -1, -1,  1, 0,  0, -1, 1};
+        private static readonly sbyte[] x = { 1, -1,  1, -1, 0, 1, 0,  -1, 0};
+        private static readonly sbyte[] y = { 1, -1, -1,  1, 0, 0, -1, 0, 1};
 
         private static void GameBtnEmptyOpen(sbyte cordX, sbyte cordY)
         {
-            for (byte i = 4; i < 8; i++)
+            for (byte i = 4; i < 9; i++)
             {
                 if 
-                (   cordX + x[i] >= 0
+                (      cordX + x[i] >= 0
                     && cordY + y[i] >= 0
                     && cordX + x[i] < _.gameBtnColNum
                     && cordY + y[i] < _.gameBtnRowNum
@@ -190,11 +190,11 @@ namespace MMayinTarlasi
                         GameBtnEmptyOpen((sbyte)(cordX + x[i]),(sbyte)(cordY + y[i]));// # //
 
                         
-                        for (byte k = 0; k < 8; k++)
+                        for (byte k = 0; k < 9; k++)
                         {
 
                             if 
-                            (   cordX + x[i] + x[k] >= 0
+                            (      cordX + x[i] + x[k] >= 0
                                 && cordY + y[i] + y[k] >= 0
                                 && cordX + x[i] + x[k] < _.gameBtnColNum
                                 && cordY + y[i] + y[k] < _.gameBtnRowNum
@@ -283,7 +283,6 @@ namespace MMayinTarlasi
                 switch (gameArrMap.map[btn.CordX, btn.CordY])
                 {
                     case 0:
-                        GameBtnEmptyAttrbutes(ref btn);
                         thread = new Thread(() => GameBtnEmptyOpen((sbyte)btn.CordX, (sbyte)btn.CordY));
                         thread.Start();
                         thread.Join();
