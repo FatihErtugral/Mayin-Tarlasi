@@ -240,7 +240,7 @@ namespace MMayinTarlasi
             _.gameBtnEmptyNum--;
         }
 
-        // Numaralı buton özellikleri
+        // Mayınlı buton özellikleri
         private static void GameBtnmMineAttrbutes(ref GameButton btn)
         {
             btn.BackColor = _.btnGameMine_BackColor;

@@ -16,35 +16,35 @@ namespace MMayinTarlasi
 
     public class ScoreEntities
     {
-        public struct Scoring
+        public struct ScoreModel
         {
             public string   PlayerName  { get; set; }
             public int      Score   { get; set; }
             public string   Date    { get; set; }
         }
         public string Version { get; set; }
-        public List<Scoring> BillLists { get; set; } = new List<Scoring>();
+        public List<ScoreModel> BillLists { get; set; } = new List<ScoreModel>();
     }
 
-    class ScoreCRUD
+    class ScoreSystem
     {
-        private static ScoreCRUD _;
+        private static ScoreSystem _;
         private ScoreEntities model;
         private FileStream  fs;
         private static readonly object _lockObject = new object();
 
 
-        public static ScoreCRUD GetInstance()
+        public static ScoreSystem GetInstance()
         {
             if(_ == null)
                 lock (_lockObject)
                     if (_ == null)
-                        _ = new ScoreCRUD();
+                        _ = new ScoreSystem();
 
             return _;
         }
 
-        public ScoreCRUD()
+        public ScoreSystem()
         {
             // Klasör yoksa klasörü oluştur.
             if (!Directory.Exists(Application.StartupPath + "\\Skor"))
@@ -83,7 +83,7 @@ namespace MMayinTarlasi
                 model.BillLists.RemoveAll(k => k.Score ==  model.BillLists.Min(xa => xa.Score));
             }
             
-            model.BillLists.Add(new ScoreEntities.Scoring {
+            model.BillLists.Add(new ScoreEntities.ScoreModel {
                 PlayerName = playerName,
                 Score = score,
                 Date = DateTime.Now.ToString("MMMM dd, yyyy"), 

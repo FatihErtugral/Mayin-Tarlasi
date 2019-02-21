@@ -131,7 +131,7 @@
             // 
             // scoringBindingSource
             // 
-            this.scoringBindingSource.DataSource = typeof(MMayinTarlasi.ScoreEntities.Scoring);
+            this.scoringBindingSource.DataSource = typeof(MMayinTarlasi.ScoreEntities.ScoreModel);
             // 
             // FormScoreBoard
             // 

@@ -23,37 +23,16 @@ namespace MMayinTarlasi
 
         GameCreate GAME;
         ConsolSlidingPanel GAMEConsol;
-        ScoreCRUD scoreSystem;
+        ScoreSystem scoreSystem;
         private string playerName ="";
         private int second = 0;
 
-        private void WindowPosition()
-        {
-            this.Location = new Point((Screen.PrimaryScreen.WorkingArea.Width - this.Width) / 2,
-                                      (Screen.PrimaryScreen.WorkingArea.Height - this.Height) / 4);
-        }
-
-        private void WindowStartupSettings()
-        {
-            timer1.Stop();
-            GAME.Clear();
-            Refresh();
-            txtBoxTakmaIsim.Text = "";
-            lblSkorDisplay.Text      =
-            lblTemizAlanDisplay.Text =
-            lblKalanSureDisplay.Text = "0";
-
-            pnlSkorBoard.Visible   = false;
-            this.Refresh();
-            pnlGameStart.Visible  = true;
-            txtBoxTakmaIsim.Focus();
-        }
-
+        
         public FormMain()
         {
             
             GAME = GameCreate.GetInstance();
-            scoreSystem = ScoreCRUD.GetInstance();
+            scoreSystem = ScoreSystem.GetInstance();
             CheckForIllegalCrossThreadCalls = false;
             InitializeComponent();
             #region Font Settings
@@ -71,54 +50,13 @@ namespace MMayinTarlasi
 
             GAMEConsol = new ConsolSlidingPanel(ref pnlConsolMain, -400, 0);
         }
+
         private void FormMain_Load(object sender, EventArgs e)
         {
             lblMayinSayisiDisplay.Font  = lblSkorDisplay.Font=
             lblTemizAlanDisplay.Font    = lblKalanSureDisplay.Font = myFont;
             this.Controls.Add(GAME.panelMap);
             GAME.panelMap.BackColor = Color.Black;
-        }
-
-        private void btnMenu_MouseDown(object sender, MouseEventArgs e)
-        {
-            Menu.Show(btnMenu, 0, btnMenu.Height);
-        }
-
-        private void ContextMenu_Opening(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-
-        }
-
-        private void toggleKolay_Click(object sender, EventArgs e)
-        {
-            toggleKolay.CheckState = CheckState.Checked;
-            toggleOrta.CheckState = CheckState.Unchecked;
-            toggleZor.CheckState = CheckState.Unchecked;
-        }
-
-        private void toggleOrta_Click(object sender, EventArgs e)
-        {
-            toggleKolay.CheckState = CheckState.Unchecked;
-            toggleOrta.CheckState = CheckState.Checked;
-            toggleZor.CheckState = CheckState.Unchecked;
-        }
-
-        private void toggleZor_Click(object sender, EventArgs e)
-        {
-            toggleKolay.CheckState = CheckState.Unchecked;
-            toggleOrta.CheckState = CheckState.Unchecked;
-            toggleZor.CheckState = CheckState.Checked;
-        }
-
-        private void çıkışToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
-        private void txtBxTakmaIsim_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-                btnBaslat_Click(this, new EventArgs());
         }
 
         private void btnBaslat_Click(object sender, EventArgs e)
@@ -192,6 +130,70 @@ namespace MMayinTarlasi
             }
         }
 
+        private void WindowPosition()
+        {
+            this.Location = new Point((Screen.PrimaryScreen.WorkingArea.Width - this.Width) / 2,
+                                      (Screen.PrimaryScreen.WorkingArea.Height - this.Height) / 4);
+        }
+
+        private void WindowStartupSettings()
+        {
+            timer1.Stop();
+            GAME.Clear();
+            Refresh();
+            txtBoxTakmaIsim.Text = "";
+            lblSkorDisplay.Text      =
+            lblTemizAlanDisplay.Text =
+            lblKalanSureDisplay.Text = "0";
+
+            pnlSkorBoard.Visible   = false;
+            this.Refresh();
+            pnlGameStart.Visible  = true;
+            txtBoxTakmaIsim.Focus();
+        }
+
+        private void btnMenu_MouseDown(object sender, MouseEventArgs e)
+        {
+            Menu.Show(btnMenu, 0, btnMenu.Height);
+        }
+
+        private void ContextMenu_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+
+        }
+
+        private void toggleKolay_Click(object sender, EventArgs e)
+        {
+            toggleKolay.CheckState = CheckState.Checked;
+            toggleOrta.CheckState = CheckState.Unchecked;
+            toggleZor.CheckState = CheckState.Unchecked;
+        }
+
+        private void toggleOrta_Click(object sender, EventArgs e)
+        {
+            toggleKolay.CheckState = CheckState.Unchecked;
+            toggleOrta.CheckState = CheckState.Checked;
+            toggleZor.CheckState = CheckState.Unchecked;
+        }
+
+        private void toggleZor_Click(object sender, EventArgs e)
+        {
+            toggleKolay.CheckState = CheckState.Unchecked;
+            toggleOrta.CheckState = CheckState.Unchecked;
+            toggleZor.CheckState = CheckState.Checked;
+        }
+
+        private void çıkışToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void txtBxTakmaIsim_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                btnBaslat_Click(this, new EventArgs());
+        }
+
         private void yeniOyunToolStripMenuItem_Click(object sender, EventArgs e)
         {
             WindowStartupSettings();
@@ -243,6 +245,7 @@ namespace MMayinTarlasi
                     txtBoxConsoleInput.Focus();
             }
         }
+
         private void ScoreBoard()
         {
             FormScoreBoard skrfrm = new FormScoreBoard
@@ -254,6 +257,7 @@ namespace MMayinTarlasi
             };
             skrfrm.ShowDialog();
         }
+
         private void skorTablosuToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ScoreBoard();

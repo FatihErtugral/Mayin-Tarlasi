@@ -4,7 +4,7 @@ namespace MMayinTarlasi
 {
     public partial class FormScoreBoard : MetroFramework.Forms.MetroForm
     {
-        ScoreCRUD scoreData = ScoreCRUD.GetInstance();
+        ScoreSystem scoreData = ScoreSystem.GetInstance();
 
         public FormScoreBoard()
         {

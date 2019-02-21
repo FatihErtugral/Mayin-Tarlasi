@@ -14,7 +14,7 @@ namespace MMayinTarlasi
         public byte CordY { get; set; }
         public bool mine = false;
         public bool prevention = false;
-
+        StringFormat formatText = new StringFormat(StringFormatFlags.NoClip);
         public object Clone()
         {
             GameButton copyButton = Activator.CreateInstance<GameButton>();//önce GameMineButton Bir instance oluşturulur.
@@ -70,12 +70,9 @@ namespace MMayinTarlasi
                 // Calling the base class OnPaint
                 base.OnPaint(pe);
                 // Setup the Formatting for the text
-                StringFormat formatText = new StringFormat(StringFormatFlags.NoClip)
-                {
-                    LineAlignment = StringAlignment.Center,
-                    Alignment = StringAlignment.Center,
-                    Trimming = StringTrimming.Character
-                };
+                formatText.Alignment = StringAlignment.Center;
+                formatText.Trimming = StringTrimming.Character;
+                formatText.LineAlignment = StringAlignment.Center;
                 // Drawing the button yoursel. The background is color
                 // pe.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(51,    55,     69)), pe.ClipRectangle);
                 // Draw the line around the button
