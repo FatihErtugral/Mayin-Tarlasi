@@ -63,6 +63,7 @@ namespace MMayinTarlasi
             if( base.Enabled )
             {
                 base.OnPaint(pe);
+                return;
             }
             else
             {
@@ -82,6 +83,7 @@ namespace MMayinTarlasi
                 // Draw the text in the button in color
                 pe.Graphics.DrawString(base.Text, base.Font, new SolidBrush(base.ForeColor),
                     new RectangleF(0F, 0F, base.Width, base.Height),  formatText);
+                return;
             }
         }
     }

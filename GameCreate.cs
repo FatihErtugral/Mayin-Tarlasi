@@ -8,18 +8,18 @@ using System.Windows.Forms;
 namespace MMayinTarlasi
 {
     //
-    // X = WIDTH    = COLUMN
-    // Y = HEIGHT   = ROW
+    // X = WIDTH    = ROW
+    // Y = HEIGHT   = COLUMN
     // 
     class GameCreate
     {
         private static GameCreate _;
         private static readonly object _lockObject = new object();
 
-        private GameButton          gBtn; 
-        private GameButton[,]       gameBtnList;
-        private GameArrayMap  gameArrMap;
-        public  Panel               panelMap;
+        private GameButton      gBtn; 
+        private GameButton[,]   gameBtnList;
+        private GameArrayMap    gameArrMap;
+        public  Panel           panelMap;
         
         private byte gameBtnColNum;
         private byte gameBtnRowNum;
@@ -29,7 +29,7 @@ namespace MMayinTarlasi
         public int  score = 0;
         public bool lose = false;
 
-        private Point    _Point     = new Point(0, 0);
+        private Point _Point = new Point(0, 0);
 
         #region Game Button Attributes
         private readonly int btnLeftRightMargin = 1;
@@ -42,7 +42,7 @@ namespace MMayinTarlasi
         private readonly Color btnGameClean_BackColor    = Color.FromArgb(191, 191, 191); 
         private readonly Color btnGameClean_BorderColor  = Color.FromArgb(191, 191, 191); 
         private readonly Color btnGameNum_BackColor      = Color.FromArgb(241,241,241);     
-        private readonly Color btnGameNum_ForeColor      = Color.FromArgb(13, 13, 13); //Color.FromArgb(165, 219, 0); 
+        private readonly Color btnGameNum_ForeColor      = Color.FromArgb(13, 13, 13);
         private readonly Color btnGameNum_BorderColor    = Color.FromArgb(164,164, 164);
         private readonly Color btnGameDefault_BackColor  = Color.FromArgb(72, 72, 72);
         private readonly Color btnGameDefault_BorderColor = Color.FromArgb(72, 72, 72);
@@ -74,25 +74,29 @@ namespace MMayinTarlasi
             {
                 Clear();
             }
-            this.gameBtnColNum  = gameBtnRowNum;
-            this.gameBtnRowNum  = gameBtnColNum;
+            this.gameBtnColNum  = gameBtnColNum;
+            this.gameBtnRowNum  = gameBtnRowNum;
             this.gameBtnMineNum = gameBtnMineNum;
             this.gameBtnEmptyNum = gameBtnRowNum * gameBtnColNum - gameBtnMineNum;
-            this.gameArrMap = new GameArrayMap(this.gameBtnColNum, this.gameBtnRowNum, this.gameBtnMineNum);
-            this.gameBtnList    = new GameButton[this.gameBtnColNum, this.gameBtnRowNum];
+            this.gameArrMap     = new GameArrayMap(this.gameBtnRowNum, this.gameBtnColNum, this.gameBtnMineNum);
+            this.gameBtnList    = new GameButton[this.gameBtnRowNum, this.gameBtnColNum];
 
             //Butonlar gameBtnList dizisine ve Form Panele ekleniyor.
-            for (byte row = 0; row < this.gameBtnColNum; row++)
+            for (byte row = 0; row < this.gameBtnRowNum; row++)
             {
-                for (byte col = 0; col < this.gameBtnRowNum; col++)
+                for (byte col = 0; col < this.gameBtnColNum; col++)
                 {
                     this.gameBtnList[row, col] =  GameBtnClonePrototype(ref row, ref col);
                     panelMap.Controls.Add(this.gameBtnList[row, col]);
                 }
             }
+            //
+            // X = WIDTH    = ROW
+            // Y = HEIGHT   = COLUMN
+            // 
             //Panel yeniden boyutlandırılıyor.
-            panelMap.Width  = (_.gameBtnColNum * btnSize.Width   + _.gameBtnColNum* btnLeftRightMargin)-btnLeftRightMargin;
-            panelMap.Height = (_.gameBtnRowNum * btnSize.Height  + _.gameBtnRowNum* btnTopBottomMargin)-btnTopBottomMargin;
+            panelMap.Height = (_.gameBtnColNum * btnSize.Height + _.gameBtnColNum* btnLeftRightMargin)-btnLeftRightMargin;
+            panelMap.Width  = (_.gameBtnRowNum * btnSize.Width  + _.gameBtnRowNum* btnTopBottomMargin)-btnTopBottomMargin;
         }
         
 
@@ -177,8 +181,8 @@ namespace MMayinTarlasi
                 if 
                 (      cordX + x[i] >= 0
                     && cordY + y[i] >= 0
-                    && cordX + x[i] < _.gameBtnColNum
-                    && cordY + y[i] < _.gameBtnRowNum
+                    && cordX + x[i] < _.gameBtnRowNum
+                    && cordY + y[i] < _.gameBtnColNum
                     && _.gameBtnList[(cordX + x[i]), (cordY + y[i])].Enabled
                     && _.gameBtnList[(cordX + x[i]), (cordY + y[i])].GameValue != 9
                     && !_.gameBtnList[(cordX + x[i]), (cordY + y[i])].prevention
@@ -196,8 +200,8 @@ namespace MMayinTarlasi
                             if 
                             (      cordX + x[i] + x[k] >= 0
                                 && cordY + y[i] + y[k] >= 0
-                                && cordX + x[i] + x[k] < _.gameBtnColNum
-                                && cordY + y[i] + y[k] < _.gameBtnRowNum
+                                && cordX + x[i] + x[k] < _.gameBtnRowNum
+                                && cordY + y[i] + y[k] < _.gameBtnColNum
                                 && _.gameBtnList[(cordX + x[i] + x[k]), (cordY + y[i] + y[k])].Enabled
                                 && _.gameBtnList[(cordX + x[i] + x[k]), (cordY + y[i] + y[k])].GameValue != 9
                                 && _.gameBtnList[(cordX + x[i] + x[k]), (cordY + y[i] + y[k])].GameValue != 0 
@@ -264,8 +268,8 @@ namespace MMayinTarlasi
 
         private void GameBtnMineAllOpen()
         {
-            for (byte row = 0; row < this.gameBtnColNum; row++)
-                for (byte col = 0; col < this.gameBtnRowNum; col++)
+            for (byte row = 0; row < this.gameBtnRowNum; row++)
+                for (byte col = 0; col < this.gameBtnColNum; col++)
                 {
                     if(_.gameArrMap.map[row, col] == 9)
                     { GameBtnmMineAttrbutes(ref _.gameBtnList[row, col]); }
@@ -307,8 +311,8 @@ namespace MMayinTarlasi
         public void MineToggleLock()
         {
             if(_.gameBtnList != null)
-            for (byte row = 0; row < this.gameBtnColNum; row++)
-                for (byte col = 0; col < this.gameBtnRowNum; col++)
+            for (byte row = 0; row < this.gameBtnRowNum; row++)
+                for (byte col = 0; col < this.gameBtnColNum; col++)
                 {
                     if(_.gameArrMap.map[row, col] == 9)
                     { GameBtnPrevetion(ref _.gameBtnList[row, col]); }
@@ -321,9 +325,9 @@ namespace MMayinTarlasi
             string map ="";
 
             if(_.gameBtnList != null)
-            for (byte row = 0; row < this.gameBtnColNum; row++)
+            for (byte row = 0; row < this.gameBtnRowNum; row++)
             {
-                for (byte col = 0; col < this.gameBtnRowNum; col++)
+                for (byte col = 0; col < this.gameBtnColNum; col++)
                 {
                     map += $" [{_.gameArrMap.map[row, col]}]";
                 }

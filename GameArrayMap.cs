@@ -48,7 +48,8 @@ namespace MMayinTarlasi
         }
         
         //
-        // X = WIDTH = COLUMN   ||  Y = HEIGHT = ROW
+        // X = WIDTH    = ROW
+        // Y = HEIGHT   = COLUMN
         // 
 
         private void MineCounter(byte cordX, byte cordY)

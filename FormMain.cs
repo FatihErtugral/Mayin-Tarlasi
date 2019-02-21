@@ -134,11 +134,11 @@ namespace MMayinTarlasi
             }
             else if (toggleOrta.CheckState == CheckState.Checked)
             {
-                GAME.Start(30, 20, 100);  second = 180;
+                GAME.Start(30, 20, 55);  second = 180;
             }
             else if (toggleZor.CheckState == CheckState.Checked)
             {
-                GAME.Start(50, 20, 10); second = 250;
+                GAME.Start(50, 20, 200); second = 250;
             }
             Refresh();
             #endregion
