@@ -17,7 +17,7 @@ namespace MMayinTarlasi
 
         public ConsolSlidingPanel(ref Panel pnl, int location_X_Start, int location_X_End)
         {
-            pnl.Top     = location_X_Start;
+            pnl.Height     = location_X_Start;
             this.Consol   = pnl;
             hidden      = true;
             Xstart      = location_X_Start;
@@ -36,15 +36,23 @@ namespace MMayinTarlasi
 
         private void t_tick(object sender, EventArgs e)
         {
-            if (hidden) ChangeSize(+10);
-            else        ChangeSize(-10);
+            if (hidden)
+            {
+                Consol.Show();
+                ChangeSize(+10);
+            }
+            else
+            {
+                Consol.Hide();
+                ChangeSize(-10);
+            }
         }
 
         private void ChangeSize(int val)
         {
-            Consol.Top += val;
+            Consol.Height += val;
 
-            if(Consol.Top <= Xstart || Consol.Top >= Xend)
+            if(Consol.Height <= Xstart || Consol.Height >= Xend)
             {
                 tmr.Stop();
                 hidden = !hidden;

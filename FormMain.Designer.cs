@@ -85,8 +85,7 @@ namespace MMayinTarlasi
             this.hakkındaToolStripMenuItem,
             this.çıkışToolStripMenuItem});
             this.Menu.Name = "Menu";
-            this.Menu.Size = new System.Drawing.Size(142, 92);
-            this.Menu.Opening += new System.ComponentModel.CancelEventHandler(this.ContextMenu_Opening);
+            this.Menu.Size = new System.Drawing.Size(181, 114);
             // 
             // yeniOyunToolStripMenuItem
             // 
@@ -123,7 +122,7 @@ namespace MMayinTarlasi
             this.btnMenu.TabIndex = 1;
             this.btnMenu.Text = "Menu";
             this.btnMenu.UseSelectable = true;
-            this.btnMenu.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnMenu_MouseDown);
+            this.btnMenu.Click += new System.EventHandler(this.btnMenu_Click);
             // 
             // pnlTakmeIsimBaslat
             // 
@@ -436,10 +435,10 @@ namespace MMayinTarlasi
             this.pnlConsolMain.AutoScroll = true;
             this.pnlConsolMain.Controls.Add(this.txtBoxConsoleInput);
             this.pnlConsolMain.Controls.Add(this.txtBoxConsoleBody);
-            this.pnlConsolMain.Location = new System.Drawing.Point(4, -376);
-            this.pnlConsolMain.Margin = new System.Windows.Forms.Padding(0, 2, 0, 2);
+            this.pnlConsolMain.Location = new System.Drawing.Point(0, 0);
+            this.pnlConsolMain.Margin = new System.Windows.Forms.Padding(0);
             this.pnlConsolMain.Name = "pnlConsolMain";
-            this.pnlConsolMain.Size = new System.Drawing.Size(564, 400);
+            this.pnlConsolMain.Size = new System.Drawing.Size(564, 50);
             this.pnlConsolMain.TabIndex = 8;
             // 
             // txtBoxConsoleInput
@@ -447,31 +446,33 @@ namespace MMayinTarlasi
             this.txtBoxConsoleInput.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtBoxConsoleInput.BackColor = System.Drawing.SystemColors.InfoText;
-            this.txtBoxConsoleInput.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtBoxConsoleInput.Enabled = false;
+            this.txtBoxConsoleInput.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtBoxConsoleInput.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.txtBoxConsoleInput.ForeColor = System.Drawing.Color.Yellow;
-            this.txtBoxConsoleInput.Location = new System.Drawing.Point(0, 384);
+            this.txtBoxConsoleInput.Location = new System.Drawing.Point(0, 34);
             this.txtBoxConsoleInput.Margin = new System.Windows.Forms.Padding(0);
             this.txtBoxConsoleInput.MaxLength = 140;
             this.txtBoxConsoleInput.Name = "txtBoxConsoleInput";
-            this.txtBoxConsoleInput.Size = new System.Drawing.Size(564, 15);
+            this.txtBoxConsoleInput.Size = new System.Drawing.Size(564, 22);
             this.txtBoxConsoleInput.TabIndex = 9;
+            this.txtBoxConsoleInput.TabStop = false;
+            this.txtBoxConsoleInput.Tag = "";
+            this.txtBoxConsoleInput.Text = "help";
             this.txtBoxConsoleInput.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtBoxConsoleInput_KeyDown);
             this.txtBoxConsoleInput.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtBoxConsoleInput_KeyPress);
             // 
             // txtBoxConsoleBody
             // 
-            this.txtBoxConsoleBody.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtBoxConsoleBody.BackColor = System.Drawing.SystemColors.Desktop;
+            this.txtBoxConsoleBody.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.txtBoxConsoleBody.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtBoxConsoleBody.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.txtBoxConsoleBody.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.txtBoxConsoleBody.ForeColor = System.Drawing.Color.LawnGreen;
-            this.txtBoxConsoleBody.Location = new System.Drawing.Point(0, 0);
+            this.txtBoxConsoleBody.Location = new System.Drawing.Point(0, -334);
             this.txtBoxConsoleBody.Margin = new System.Windows.Forms.Padding(0);
             this.txtBoxConsoleBody.Name = "txtBoxConsoleBody";
             this.txtBoxConsoleBody.ReadOnly = true;
+            this.txtBoxConsoleBody.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
             this.txtBoxConsoleBody.Size = new System.Drawing.Size(564, 384);
             this.txtBoxConsoleBody.TabIndex = 0;
             this.txtBoxConsoleBody.TabStop = false;
@@ -482,7 +483,6 @@ namespace MMayinTarlasi
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoScroll = true;
             this.AutoScrollMargin = new System.Drawing.Size(5, 5);
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(570, 200);

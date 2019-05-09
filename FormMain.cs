@@ -48,7 +48,7 @@ namespace MMayinTarlasi
             #endregion
             this.StyleManager = mainStyleManager;
 
-            GAMEConsol = new ConsolSlidingPanel(ref pnlConsolMain, -400, 0);
+            GAMEConsol = new ConsolSlidingPanel(ref pnlConsolMain, 0, 400);
         }
 
         private void FormMain_Load(object sender, EventArgs e)
@@ -152,15 +152,6 @@ namespace MMayinTarlasi
             txtBoxTakmaIsim.Focus();
         }
 
-        private void btnMenu_MouseDown(object sender, MouseEventArgs e)
-        {
-            Menu.Show(btnMenu, 0, btnMenu.Height);
-        }
-
-        private void ContextMenu_Opening(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-
-        }
 
         private void toggleKolay_Click(object sender, EventArgs e)
         {
@@ -239,10 +230,14 @@ namespace MMayinTarlasi
         {
             if (e.KeyChar == '"')
             {
+                pnlConsolMain.Width = this.Width;
                 GAMEConsol.ToggleOpenClose();
-                txtBoxConsoleInput.Enabled = !txtBoxConsoleInput.Enabled;
-                if(txtBoxConsoleInput.Enabled)
+                if (pnlConsolMain.Visible)
+                {
                     txtBoxConsoleInput.Focus();
+                }
+                Refresh();
+                return;
             }
         }
 
@@ -261,6 +256,11 @@ namespace MMayinTarlasi
         private void skorTablosuToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ScoreBoard();
+        }
+
+        private void btnMenu_Click(object sender, EventArgs e)
+        {
+            Menu.Show(btnMenu, 0, btnMenu.Height);
         }
     }
 }
